@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# 业务数据
+logs
+images
+build
+.vscode
+pack
+proto/ellipse_detect.pb.cc
+proto/ellipse_detect.pb.h

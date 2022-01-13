@@ -1,0 +1,66 @@
+syntax="proto2";
+
+option cc_generic_services = true;
+
+enum Code {
+  OK = 0;
+  InvalidParameter = 1;
+  InvalidParameterValue = 2;
+  MissingParameter = 3;
+  UnknownParameter = 4;
+  AuthFailure = 5;
+  InternalError = 6;
+  InvalidAction = 7;
+  UnauthorizedOperation = 8;
+  RequestLimitExceeded = 9;
+  NoSuchVersion = 10;
+  UnsupportedRegion = 11;
+  UnsupportedOperation = 12;
+  ResourceNotFound = 13;
+  LimitExceeded = 14;
+  ResourceUnavailable = 15;
+  ResourceInsufficient = 16;
+  FailedOperation = 17;
+  ResourceInUse = 18;
+  DryRunOperation = 19;
+  ResourcesSoldOut = 20;
+  OperationDenied = 21;
+  AdaptErrorBase = 30;
+}
+
+message Point {
+  optional float X = 1;
+  optional float Y = 2;
+}
+
+message Ellipse {
+  optional Point O = 1;
+  optional float A = 2;
+  optional float B = 3;
+  optional float Angle = 4;
+  optional float Goodness = 5;
+  optional float Coverangle = 6;
+  optional int32 Polarity = 7;
+  repeated float Coefficients = 8;
+}
+
+message EllipseDetectRequest {
+  optional string ImageUrl = 1;
+  optional bytes Image = 2;
+  optional string RequestId = 3;
+};
+
+message EllipseDetectResponse {
+  optional Code ErrorCode = 1;
+  optional string ErrorMessage = 2;
+  optional bytes ShowImage = 3;
+  repeated Ellipse EllipseSet = 4;
+  optional string RequestId = 5;
+};
+
+message HttpRequest { };
+message HttpResponse { };
+
+service EllipseDetectService {
+  rpc EllipseDetect(HttpRequest) returns (HttpResponse);
+};
