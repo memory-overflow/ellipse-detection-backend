@@ -13,6 +13,16 @@ cmake ..
 make
 cd ..
 
-mkdir pack
-cp build/server pack
-cp -r conf pack/
+packdir="pack"
+mkdir -p ${packdir}/lib
+mkdir -p ${packdir}/bin
+
+cp build/server ${packdir}/bin
+cp -r conf ${packdir}/
+cp -r scripts ${packdir}/
+
+dep_list=$( ldd "build/server" | awk '{if (match($3,"/")){ print $3 }}')
+if [ ! -z "$dep_list" ]
+then
+    cp -L $dep_list ${packdir}/lib
+fi
