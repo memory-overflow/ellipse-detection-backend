@@ -37,7 +37,7 @@ def main():
   body = {
     "RequestId": "test",
     # "Image": bas64, 
-    "ImageUrl" : "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fapi.meisupic.com%2FgetImg.php%3Fimgurl%3Dhttps%3A%2F%2Fst2.depositphotos.com%2F3461217%2F9832%2Fv%2F950%2Fdepositphotos_98323406-stock-illustration-isolated-traffic-lights.jpg%26id%3D98323406%26userid%3D3461217%26imgfile%3Dthu&refer=http%3A%2F%2Fapi.meisupic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644668445&t=709dd25879842b45db48f8ce9660bb63"
+    "ImageUrl" : "https://7072-prod-4gam91yoc446aa31-1309268318.tcb.qcloud.la/images/x3rDCRHMTS8yTT4W"
   }
   url = "http://127.0.0.1:8000/EllipseDetect"
   response = requests.post(url, json=body)

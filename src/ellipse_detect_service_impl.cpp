@@ -99,6 +99,11 @@ void Process(EllipseDetectRequest *request, EllipseDetectResponse *response) {
               8,
               0);
   }
+  int max_size = std::max(origin_image.cols, origin_image.rows);
+  if (max_size > 1280) {
+    double scale = 1280.0 / max_size;
+    cv::resize(origin_image, origin_image, cv::Size(int(origin_image.cols * scale), int(origin_image.rows * scale)));
+  }
   std::vector<uchar> ret_buf;
   cv::imencode(".jpg", origin_image, ret_buf);
   response->set_showimage((const char *)(ret_buf.data()), ret_buf.size());
