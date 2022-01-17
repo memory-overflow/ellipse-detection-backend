@@ -148,6 +148,6 @@ void EllipseDetectServiceImpl::EllipseDetect(
   }
   
   cntl->response_attachment() = rsp;
-  LOG(ERROR) << "[" << request.requestid() << "]" << "Response data: " << rsp;
+  LOG(INFO) << "[" << request.requestid() << "]" << "Response data length: " << rsp.length();
 }
 
