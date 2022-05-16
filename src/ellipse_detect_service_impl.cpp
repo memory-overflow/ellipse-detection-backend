@@ -68,7 +68,7 @@ void Process(EllipseDetectRequest *request, EllipseDetectResponse *response) {
       return;
   }
   std::string filename = FLAGS_image_save_dir + "/" + GenRandomString(16) + "-" + request->requestid() + ".jpg";
-  // mkdir 
+  // mkdir
   system(("mkdir -p " + FLAGS_image_save_dir).c_str());
   cv::imwrite(filename, origin_image);
   cv::cvtColor(origin_image, image, CV_RGB2GRAY);
@@ -100,8 +100,8 @@ void Process(EllipseDetectRequest *request, EllipseDetectResponse *response) {
               0);
   }
   int max_size = std::max(origin_image.cols, origin_image.rows);
-  if (max_size > 1280) {
-    double scale = 1280.0 / max_size;
+  if (max_size > 360) {
+    double scale = 360.0 / max_size;
     cv::resize(origin_image, origin_image, cv::Size(int(origin_image.cols * scale), int(origin_image.rows * scale)));
   }
   std::vector<uchar> ret_buf;
@@ -116,7 +116,7 @@ void EllipseDetectServiceImpl::EllipseDetect(
   ::HttpResponse*,
   ::google::protobuf::Closure* done) {
 
-  
+
   brpc::ClosureGuard done_guard(done);
   brpc::Controller* cntl = static_cast<brpc::Controller*>(controller);
   cntl->http_response().set_content_type("application/json");
@@ -151,7 +151,7 @@ void EllipseDetectServiceImpl::EllipseDetect(
   if (!json2pb::ProtoMessageToJson(response, &rsp, &error_msg)) {
     LOG(ERROR) << error_msg;
   }
-  
+
   cntl->response_attachment() = rsp;
   LOG(INFO) << "[" << request.requestid() << "]" << "Response data length: " << rsp.length();
 }
